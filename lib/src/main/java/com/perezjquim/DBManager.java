@@ -102,6 +102,7 @@ public class DBManager
     {
         StringBuilder sql = new StringBuilder("INSERT INTO " + table + " (");
 
+        String[] a = {"ola"};
         String[] columns = (String[]) data.keySet().toArray();
         sql.append(StringUtils.join(columns, ","));
 
@@ -120,7 +121,7 @@ public class DBManager
         query(sql.toString());
     }
 
-    public void update(String table, HashMap<String,String> data)
+    public void update(String table, HashMap<String,String> data, HashMap<String,String> filter)
     {
         StringBuilder sql = new StringBuilder("UPDATE " + table + " SET ");
 
@@ -136,16 +137,28 @@ public class DBManager
 
         sql = new StringBuilder(sql.substring(0, sql.length() - 2));
 
+        sql.append(" WHERE ");
+
+        for(Map.Entry<String, String> entry : filter.entrySet())
+        {
+            column = entry.getKey();
+            value = entry.getValue();
+
+            sql.append(column).append("='").append(value).append("' AND ");
+        }
+
+        sql = new StringBuilder(sql.substring(0, sql.length() - 6));
+
         query(sql.toString());
     }
 
-    public void delete(String table, HashMap<String,String> data)
+    public void delete(String table, HashMap<String,String> filter)
     {
         StringBuilder sql = new StringBuilder("DELETE FROM " + table + " WHERE ");
 
         String column, value;
 
-        for(Map.Entry<String, String> entry : data.entrySet())
+        for(Map.Entry<String, String> entry : filter.entrySet())
         {
             column = entry.getKey();
             value = entry.getValue();
@@ -168,7 +181,7 @@ public class DBManager
         query(sql);
     }
 
-    public void clearTable(String table)
+    public void clearTable(String ... table)
     {
         String sql = "DELETE FROM " + table;
 
