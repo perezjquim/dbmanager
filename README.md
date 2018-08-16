@@ -37,7 +37,7 @@ Initialization:
 {
 	(...)
 
-	DatabaseManager dbManager = new DatabaseManager("ExampleDB");
+	DBManager dbManager = new DBManager("ExampleDB");
 
 	(...)
 }
@@ -140,7 +140,7 @@ Clear an existing table:
 
 	// Equivallent to:
 	// DELETE FROM 'Table1'
-	
+
 	dbManager.clearTable("Table1");
 
 	(...)
