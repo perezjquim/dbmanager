@@ -48,6 +48,9 @@ Select operation:
 {
 	(...)
 
+	// Equivallent to:
+	// SELECT * FROM 'Table1' WHERE 'id'=2 AND 'name'='dummy' AND 'balance'='10'
+ 
 	String[] from = { "Table1" };
 	HashMap<String,String> where = new HashMap<>();
 	where.put("id","2");
@@ -63,6 +66,9 @@ Insert operation:
 ```java
 {
 	(...)
+
+	// Equivallent to:
+	// INSERT INTO 'Table1' ('id','name','balance') VALUES('3','dummy2','22')
 
 	String into = "Table1";
 	HashMap<String,String> data = new HashMap<>();
@@ -80,6 +86,9 @@ Update operation:
 {
 	(...)
 
+	// Equivallent to:
+	// UPDATE 'Table1' SET 'balance'='33' WHERE 'id'='3'
+
 	String table = "Table1";
 	HashMap<String,String> newData = new HashMap<>();
 	newData.put("balance","33");			
@@ -96,6 +105,9 @@ Delete operation:
 {
 	(...)
 
+	// Equivallent to:
+	// DELETE FROM 'Table1' WHERE 'id'='3'
+
 	String table = "Table1";
 	HashMap<String,String> filter = new HashMap<>();
 	filter.put("id","3");			
@@ -110,6 +122,9 @@ Create a new table:
 {
 	(...)
 
+	// Equivallent to:
+	// CREATE TABLE IF NOT EXISTS 'Table2' (`Test` VARCHAR(45) NOT NULL PRIMARY KEY)
+
 	String table = "Table2";
 	Column[] columns = { new Column("Test","VARCHAR(45)",true,true); } // The last two parameters of each column refer to if it can handle null values and if it is the primary key, respectively
 	dbManager.createTable(table,columns);
@@ -123,6 +138,9 @@ Clear an existing table:
 {
 	(...)
 
+	// Equivallent to:
+	// DELETE FROM 'Table1'
+	
 	dbManager.clearTable("Table1");
 
 	(...)
