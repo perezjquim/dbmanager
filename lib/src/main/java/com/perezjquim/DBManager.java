@@ -51,7 +51,7 @@ public class DBManager
     public synchronized void query(String s)
     {
         Log.e("-- Executing query --",s);
-        db.execSQL(s);
+        new Thread(() -> db.execSQL(s)).start();
     }
 
     public void queryInTransaction(String ... queries)
